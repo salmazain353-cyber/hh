@@ -1,0 +1,445 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Hanoood's Birthday</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&family=Aref+Ruqaa:wght@400;700&display=swap">
+<style>
+/* Layout: a step-by-step journey, one screen at a time. Celebration intro, a sealed envelope that opens into an Arabic card, then a photo show with the words passing one by one over the song. Soft mauve tones. */
+:root {
+  --bg: #F6F1FA;
+  --band: #EBE2F3;
+  --surface: #FFFFFF;
+  --fg: #2E2140;
+  --muted: #6F5F85;
+  --accent: #7E57A6;
+  --accent-deep: #6A4592;
+  --accent-soft: #CDB8E3;
+  --line: #D9CCE6;
+  --ph-a: #E3D6F0;
+  --on-accent: #FFFFFF;
+  --shadow: rgba(62, 36, 94, .22);
+  --show-bg: #1B1126;
+  --display: 'Instrument Serif', 'Georgia', serif;
+  --body: 'DM Sans', system-ui, sans-serif;
+  --arabic: 'Aref Ruqaa', 'Amiri', 'Traditional Arabic', serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1C1426; --band: #251B33; --surface: #2D2140; --fg: #F2EAF9; --muted: #B7A6CB;
+    --accent: #B58BE0; --accent-deep: #9C70C9; --accent-soft: #4A3566; --line: #41325A; --ph-a: #33264A; --on-accent: #1C1426; --shadow: rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1C1426; --band: #251B33; --surface: #2D2140; --fg: #F2EAF9; --muted: #B7A6CB;
+  --accent: #B58BE0; --accent-deep: #9C70C9; --accent-soft: #4A3566; --line: #41325A; --ph-a: #33264A; --on-accent: #1C1426; --shadow: rgba(0, 0, 0, .5);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.7; padding-block: 0; }
+.inner {
+  max-width: 980px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: clamp(40px, 8vw, 88px);
+}
+p { margin: 0; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.05; letter-spacing: -0.01em; text-wrap: balance; }
+em { color: var(--accent); }
+svg.i { fill: currentColor; }
+.label { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+
+.view { overflow-x: clip; min-height: 100svh; }
+.view:not([hidden]) { animation: fade .5s ease both; }
+.tint { background: var(--band); }
+
+.btn {
+  font: inherit; font-weight: 600; cursor: pointer;
+  background: var(--accent); color: var(--on-accent); border: 0; border-radius: 999px;
+  padding: 14px 32px; transition: transform .15s, opacity .15s;
+}
+.btn:hover { opacity: .9; transform: translateY(-1px); }
+.btn:active { transform: scale(.97); }
+.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent-soft); }
+.btn:focus-visible, .env:focus-visible, .sound:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 4px; }
+.nav { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 40px; }
+.dots { display: flex; gap: 8px; margin-inline-start: auto; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-soft); }
+.dots i.on { background: var(--accent); }
+
+/* music button */
+.sound {
+  position: fixed; z-index: 25;
+  top: calc(env(safe-area-inset-top, 0px) + 12px); right: max(12px, env(safe-area-inset-right, 0px));
+  width: 46px; height: 46px; border-radius: 50%; padding: 0;
+  border: 1px solid var(--line); background: var(--surface); color: var(--accent);
+  display: grid; place-items: center; cursor: pointer; box-shadow: 0 6px 16px -8px var(--shadow);
+}
+.sound svg { width: 20px; height: 20px; fill: currentColor; }
+.sound .ico-pause { display: none; }
+.sound.playing .ico-pause { display: block; }
+.sound.playing .ico-play { display: none; }
+
+/* floating hearts */
+.floaters { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+.floaters svg { position: absolute; bottom: -48px; opacity: 0; animation: rise var(--d) linear var(--delay) infinite; }
+.has-floaters { position: relative; }
+.has-floaters > .inner { position: relative; z-index: 1; }
+
+/* intro */
+.intro { display: grid; align-items: center; background: radial-gradient(circle at 50% 30%, var(--accent-soft), transparent 62%), var(--bg); }
+.intro .inner { display: grid; gap: 20px; justify-items: center; text-align: center; padding-top: max(48px, calc(env(safe-area-inset-top, 0px) + 32px)); }
+.intro h1 { font-size: clamp(54px, 13vw, 132px); animation: pop .9s cubic-bezier(.2,1.4,.4,1) .2s both; }
+.intro .lead { max-width: 30ch; color: var(--muted); font-size: clamp(17px, 3vw, 21px); animation: rise-in .8s ease .7s both; }
+.intro .btn { animation: rise-in .8s ease 1.1s both, glow 2.2s ease-in-out 2s infinite; }
+.big-heart { width: clamp(72px, 16vw, 120px); height: clamp(72px, 16vw, 120px); color: var(--accent); animation: beat 1.4s ease-in-out infinite; }
+
+/* letter view */
+.letter-view { display: grid; align-items: center; }
+.letter-view .inner { width: 100%; display: grid; justify-items: center; gap: 28px; }
+.stage[hidden] { display: none; }
+.env-stage { display: grid; justify-items: center; gap: 56px; text-align: center; padding-top: 40px; }
+.env-stage h2 { font-size: clamp(34px, 7vw, 58px); }
+.env-stage p.tap { color: var(--muted); animation: bob 1.8s ease-in-out infinite; }
+
+.env { position: relative; width: min(84vw, 360px); aspect-ratio: 3 / 2; border: 0; background: none; padding: 0; cursor: pointer; perspective: 900px; filter: drop-shadow(0 20px 28px var(--shadow)); animation: sway 3.2s ease-in-out infinite; }
+.env .back { position: absolute; inset: 0; background: var(--accent-soft); border-radius: 10px; }
+.env .paper { position: absolute; left: 9%; right: 9%; top: 9%; height: 82%; background: var(--surface); border-radius: 6px; display: grid; place-items: center; color: var(--accent); transition: transform .8s ease .35s; z-index: 1; }
+.env .paper svg { width: 36px; height: 36px; }
+.env .pocket { position: absolute; inset: 0; background: var(--accent); border-radius: 10px; clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%); z-index: 2; }
+.env .flap { position: absolute; left: 0; right: 0; top: 0; height: 58%; background: var(--accent-deep); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top center; transition: transform .6s ease, z-index 0s .3s; z-index: 3; }
+.env .seal { position: absolute; left: 50%; top: 46%; width: 34px; height: 34px; margin-left: -17px; color: var(--on-accent); z-index: 4; transition: opacity .3s; animation: beat 1.4s ease-in-out infinite; }
+.env.open { animation: none; }
+.env.open .flap { transform: rotateX(180deg); z-index: 0; }
+.env.open .seal { opacity: 0; }
+.env.open .paper { transform: translateY(-34%); }
+
+/* the card */
+.card-stage { width: 100%; display: grid; justify-items: center; gap: 8px; }
+.card {
+  position: relative; width: min(100%, 560px);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 28px;
+  padding: clamp(34px, 7vw, 60px) clamp(22px, 6vw, 52px);
+  text-align: center; box-shadow: 0 24px 50px -24px var(--shadow);
+  display: grid; gap: 22px; font-family: var(--arabic);
+}
+.card .corner { position: absolute; width: 22px; height: 22px; color: var(--accent-soft); }
+.card .c1 { top: 18px; inset-inline-start: 18px; } .card .c2 { top: 18px; inset-inline-end: 18px; }
+.card .c3 { bottom: 18px; inset-inline-start: 18px; } .card .c4 { bottom: 18px; inset-inline-end: 18px; }
+.card .to { font-size: clamp(26px, 6.4vw, 36px); font-weight: 700; color: var(--accent); line-height: 1.5; }
+.card .msg { display: grid; gap: 18px; }
+.card .msg p { font-size: clamp(21px, 5vw, 27px); line-height: 2; }
+.card .from { font-size: 30px; font-weight: 700; color: var(--accent); display: inline-flex; gap: 10px; align-items: center; justify-content: center; }
+.card .from svg { width: 22px; height: 22px; animation: beat 1.4s ease-in-out infinite; }
+.card.show { animation: card-in .8s cubic-bezier(.2,1.2,.4,1) both; }
+.card.show .to, .card.show .msg p, .card.show .from { animation: rise-in .8s ease both; }
+.card.show .to { animation-delay: .5s; }
+.card.show .msg p:nth-child(1) { animation-delay: 1.1s; }
+.card.show .msg p:nth-child(2) { animation-delay: 2s; }
+.card.show .msg p:nth-child(3) { animation-delay: 2.9s; }
+.card.show .msg p:nth-child(4) { animation-delay: 3.8s; }
+.card.show .from { animation-delay: 4.7s; }
+.card-nav { width: min(100%, 560px); }
+
+/* photo show */
+.show-view { min-height: 0; background: var(--show-bg); color: #fff; }
+.show { position: relative; height: calc(100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); overflow: hidden; }
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; display: flex; justify-content: center; align-items: flex-start; padding: 64px 16px 0; }
+.slide.on { opacity: 1; }
+.slide .bg { position: absolute; inset: -22%; width: 144%; height: 144%; object-fit: cover; filter: blur(30px) brightness(.5) saturate(1.2); }
+.slide .fg { position: relative; display: block; width: auto; height: auto; max-width: min(100%, 720px); max-height: calc(100% - 104px); border-radius: 22px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .6); }
+.slide.on .fg { animation: drift 6s ease-out both; }
+.show-bar { position: absolute; left: 0; right: 0; bottom: 16px; padding-inline: max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: 14px; }
+.track { height: 3px; background: rgba(255, 255, 255, .22); border-radius: 3px; overflow: hidden; }
+.track i { display: block; height: 100%; width: 0; background: #fff; }
+.show-bar .row { display: flex; justify-content: space-between; gap: 12px; }
+.btn.light { background: rgba(255, 255, 255, .14); color: #fff; padding: 10px 24px; }
+.btn.light.solid { background: #fff; color: #2E2140; }
+
+/* finale */
+.end-view { display: grid; align-items: center; background: radial-gradient(circle at 50% 70%, var(--accent-soft), transparent 60%), var(--bg); }
+.end-view .inner { display: grid; gap: 18px; justify-items: center; text-align: center; }
+.end-view h2 { font-size: clamp(44px, 10vw, 100px); }
+.end-view p.sub { color: var(--muted); max-width: 30ch; font-size: clamp(17px, 3vw, 20px); }
+.end-view .row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
+footer { margin-top: 32px; color: var(--muted); font-size: 14px; padding-bottom: max(8px, env(safe-area-inset-bottom, 0px)); }
+
+canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; }
+
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes card-in { from { opacity: 0; transform: scale(.86) translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: none; } }
+@keyframes beat { 0%, 100% { transform: scale(1); } 14% { transform: scale(1.16); } 28% { transform: scale(1); } 42% { transform: scale(1.16); } 70% { transform: scale(1); } }
+@keyframes rise { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 12% { opacity: .75; } 85% { opacity: .55; } 100% { transform: translateY(-115svh) rotate(25deg); opacity: 0; } }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); } 50% { box-shadow: 0 0 0 14px transparent; } }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+@keyframes sway { 0%, 100% { transform: rotate(-1.5deg); } 50% { transform: rotate(1.5deg); } }
+@keyframes drift { from { transform: scale(1); } to { transform: scale(1.045); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .floaters svg { opacity: .4; bottom: auto; top: var(--t); }
+}
+</style>
+
+<main lang="en">
+
+  <section class="view intro has-floaters" id="intro">
+    <div class="floaters" data-floaters aria-hidden="true"></div>
+    <div class="inner">
+      <svg class="i big-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <h1>Happy birthday, <em>Hanoood</em></h1>
+      <p class="lead">I made something just for you.</p>
+      <button class="btn" type="button" data-go="letter" data-music>Tap to open</button>
+    </div>
+  </section>
+
+  <section class="view tint letter-view has-floaters" id="letter" hidden>
+    <div class="floaters" data-floaters aria-hidden="true"></div>
+    <div class="inner">
+
+      <div class="stage env-stage" id="envStage">
+        <h2>A letter for you</h2>
+        <button class="env" id="env" type="button" aria-label="Open the letter">
+          <span class="back"></span>
+          <span class="paper"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+          <span class="pocket"></span>
+          <span class="flap"></span>
+          <svg class="i seal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </button>
+        <p class="tap">Tap the envelope</p>
+      </div>
+
+      <div class="stage card-stage" id="cardStage" hidden>
+        <article class="card" id="card" dir="rtl" lang="ar">
+          <svg class="i corner c1" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <svg class="i corner c2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <svg class="i corner c3" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <svg class="i corner c4" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <p class="to">كل عام وأنتِ بألف خير يا هنوووود</p>
+          <div class="msg">
+            <p>بحبك يا هنود قد الدنيا، مصايبي متحلاش من غيرك.</p>
+            <p>يارب دايمًا في ضهر بعض، وأشوفك أحسن وأشطر مدلكاتيه في الدنيا يا روحي.</p>
+            <p>مش عارفة من غيرك كنت هعمل إيه والله، إنتي عارفة غلاوتك من غير ما أقولك.</p>
+            <p>يارب سنينك الجاية كلها تكون مليانة سعادة وفرح للأبد، أحلى هنودة في الدنيا كلها.</p>
+          </div>
+          <p class="from"><span>سلمى</span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></p>
+        </article>
+        <div class="nav card-nav">
+          <button class="btn ghost" type="button" data-go="intro">Back</button>
+          <button class="btn" type="button" data-go="photos">See our photos</button>
+          <div class="dots" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="view show-view" id="photos" hidden>
+    <div class="show">
+      <div id="slides" aria-hidden="true"></div>
+      <div class="show-bar">
+        <div class="track" aria-hidden="true"><i id="bar"></i></div>
+        <div class="row">
+          <button class="btn light" type="button" data-go="letter">Back</button>
+          <button class="btn light solid" type="button" data-go="end">Finish</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="view end-view" id="end" hidden>
+    <div class="inner">
+      <svg class="i big-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <h2>Here's to <em>another year</em></h2>
+      <p class="sub">May it be softer, funnier and kinder than the last one.</p>
+      <div class="row">
+        <button class="btn" type="button" id="again">Celebrate again</button>
+        <button class="btn ghost" type="button" data-go="intro" data-music>Play it again</button>
+      </div>
+      <footer>Made with love by Salma</footer>
+    </div>
+  </section>
+</main>
+
+<button class="sound" id="sound" type="button" aria-label="Play music">
+  <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+  <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+</button>
+<audio id="song" src="audio/song.mp3" preload="auto"></audio>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  var order = ['intro', 'letter', 'photos', 'end'];
+  var views = {};
+  order.forEach(function (n) { views[n] = document.getElementById(n); });
+  function reduced() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  var HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+
+  /* floating hearts */
+  var tones = ['var(--accent)', 'var(--accent-soft)', 'var(--accent)', 'var(--muted)'];
+  Array.prototype.forEach.call(document.querySelectorAll('[data-floaters]'), function (fl) {
+    for (var i = 0; i < 20; i++) {
+      var w = document.createElement('div');
+      w.innerHTML = HEART.replace('<svg ', '<svg class="i" ');
+      var s = w.firstChild;
+      var sz = 16 + Math.random() * 28;
+      s.style.width = sz + 'px'; s.style.height = sz + 'px';
+      s.style.left = (Math.random() * 96) + '%';
+      s.style.color = tones[i % tones.length];
+      s.style.setProperty('--d', (7 + Math.random() * 7).toFixed(1) + 's');
+      s.style.setProperty('--delay', (-Math.random() * 12).toFixed(1) + 's');
+      s.style.setProperty('--t', (Math.random() * 90) + '%');
+      fl.appendChild(s);
+    }
+  });
+
+  /* confetti and hearts */
+  var cv = document.getElementById('confetti');
+  var ctx = cv.getContext('2d');
+  var parts = [], running = false;
+  var colors = ['#7E57A6', '#B58BE0', '#CDB8E3', '#E8D9F5', '#5B3A86', '#D9A8E8'];
+  function size() { cv.width = window.innerWidth; cv.height = window.innerHeight; }
+  size(); window.addEventListener('resize', size);
+  function drawHeart(s) {
+    ctx.beginPath();
+    ctx.moveTo(0, s * .35);
+    ctx.bezierCurveTo(-s * .9, -s * .2, -s * .4, -s * .8, 0, -s * .35);
+    ctx.bezierCurveTo(s * .4, -s * .8, s * .9, -s * .2, 0, s * .35);
+    ctx.fill();
+  }
+  function burst(n, y) {
+    if (reduced()) return;
+    for (var i = 0; i < n; i++) {
+      parts.push({
+        x: cv.width / 2 + (Math.random() - .5) * cv.width * .5,
+        y: cv.height * (y || .4),
+        vx: (Math.random() - .5) * 13,
+        vy: -Math.random() * 12 - 3,
+        w: 6 + Math.random() * 6, h: 8 + Math.random() * 8,
+        heart: Math.random() < .45, hs: 9 + Math.random() * 9,
+        r: Math.random() * 6.28, vr: (Math.random() - .5) * .3,
+        c: colors[(Math.random() * colors.length) | 0], life: 0
+      });
+    }
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  function tick() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    parts = parts.filter(function (p) { return p.y < cv.height + 30 && p.life < 260; });
+    parts.forEach(function (p) {
+      p.vy += .26; p.x += p.vx; p.y += p.vy; p.vx *= .99; p.r += p.vr; p.life++;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.heart ? p.r * .3 : p.r);
+      ctx.fillStyle = p.c;
+      if (p.heart) { drawHeart(p.hs); } else { ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+      ctx.restore();
+    });
+    if (parts.length) { requestAnimationFrame(tick); } else { running = false; ctx.clearRect(0, 0, cv.width, cv.height); }
+  }
+
+  /* music */
+  var song = document.getElementById('song');
+  var soundBtn = document.getElementById('sound');
+  var bar = document.getElementById('bar');
+  function syncBtn() {
+    var on = !song.paused && !song.ended;
+    soundBtn.classList.toggle('playing', on);
+    soundBtn.setAttribute('aria-label', on ? 'Pause music' : 'Play music');
+  }
+  function startSong() {
+    if (song.ended) { song.currentTime = 0; }
+    var p = song.play();
+    if (p && p.catch) { p.catch(function () {}); }
+  }
+  soundBtn.addEventListener('click', function () {
+    if (song.paused || song.ended) { startSong(); } else { song.pause(); }
+  });
+  ['play', 'pause', 'ended'].forEach(function (ev) { song.addEventListener(ev, syncBtn); });
+  song.addEventListener('timeupdate', function () {
+    if (song.duration) { bar.style.width = (song.currentTime / song.duration * 100) + '%'; }
+  });
+  song.addEventListener('ended', function () {
+    if (current() === 'photos') { location.hash = 'end'; }
+  });
+
+  /* envelope */
+  var env = document.getElementById('env');
+  var envStage = document.getElementById('envStage');
+  var cardStage = document.getElementById('cardStage');
+  var card = document.getElementById('card');
+  var opening = false, timer = null;
+  function resetLetter() {
+    clearTimeout(timer); opening = false;
+    env.classList.remove('open'); card.classList.remove('show');
+    envStage.hidden = false; cardStage.hidden = true;
+  }
+  env.addEventListener('click', function () {
+    if (opening) return;
+    opening = true;
+    env.classList.add('open');
+    burst(50, .5);
+    timer = setTimeout(function () {
+      envStage.hidden = true; cardStage.hidden = false;
+      card.classList.remove('show'); void card.offsetWidth; card.classList.add('show');
+      burst(110, .35);
+    }, reduced() ? 100 : 1250);
+  });
+
+  /* photo show: big clear photos loop, no words, until the song ends */
+  var photoFiles = ['01', '02', '09', '04', '03', '05', '10', '06', '08', '07', '11', '12', '13'];
+  var slidesEl = document.getElementById('slides');
+  var slideEls = [], si = 0, slideTimer = null, built = false;
+  function build() {
+    if (built) return; built = true;
+    photoFiles.forEach(function (f) {
+      var d = document.createElement('div'); d.className = 'slide';
+      var bg = document.createElement('img'); bg.className = 'bg'; bg.alt = ''; bg.src = 'img/' + f + '.jpg';
+      var fg = document.createElement('img'); fg.className = 'fg'; fg.alt = ''; fg.src = 'img/' + f + '.jpg';
+      d.appendChild(bg); d.appendChild(fg); slidesEl.appendChild(d); slideEls.push(d);
+    });
+  }
+  function showSlide(i) {
+    si = (i + slideEls.length) % slideEls.length;
+    slideEls.forEach(function (el, k) { el.classList.toggle('on', k === si); });
+  }
+  function startShow() {
+    build(); stopShow();
+    showSlide(0);
+    slideTimer = setInterval(function () { showSlide(si + 1); }, 5200);
+  }
+  function stopShow() { clearInterval(slideTimer); }
+
+  /* screens */
+  function current() {
+    var n = (location.hash || '').slice(1);
+    return order.indexOf(n) > -1 ? n : 'intro';
+  }
+  function show(name, first) {
+    order.forEach(function (n) { views[n].hidden = (n !== name); });
+    if (name === 'letter') { resetLetter(); }
+    if (name === 'photos') { startShow(); } else { stopShow(); }
+    window.scrollTo(0, 0);
+    if (name === 'intro' && first) { setTimeout(function () { burst(150, .4); }, 350); }
+    if (name === 'end') { burst(170, .4); }
+  }
+  window.addEventListener('hashchange', function () { show(current(), false); });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('[data-go]') : null;
+    if (!b) return;
+    if (b.hasAttribute('data-music')) { startSong(); }
+    var to = b.getAttribute('data-go');
+    if (current() === to) { show(to, false); return; }
+    location.hash = to;
+  });
+  document.getElementById('again').addEventListener('click', function () { burst(170, .4); });
+
+  syncBtn();
+  show(current(), true);
+})();
+</script>
+
+</body></html>
